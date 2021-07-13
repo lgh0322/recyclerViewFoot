@@ -18,7 +18,7 @@ class Fuck (var context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>
     private val TYPE_FOOT = 1 //尾部刷新
 
 
-    private val mDatas= arrayListOf<String>()
+     val mDatas= arrayListOf<String>()
 
 init {
     mDatas.add("fuck")
@@ -62,6 +62,8 @@ init {
         }
         return TYPE_ITEM;
     }
+
+
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
