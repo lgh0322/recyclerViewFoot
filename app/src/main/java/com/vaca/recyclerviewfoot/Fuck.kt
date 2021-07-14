@@ -65,6 +65,18 @@ init {
         notifyDataSetChanged()
     }
 
+    fun notifyWithLimitItemNumb2(limitNumb: Int, dpHeight: Int, rv: RecyclerView) {
+        val params = rv.layoutParams
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT
+        if (mDatas.size < limitNumb) {
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+        } else {
+            params.height =dpHeight * limitNumb
+        }
+        rv.layoutParams = params
+        notifyDataSetChanged()
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 //        if (viewType == TYPE_ITEM) {

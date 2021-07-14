@@ -32,7 +32,8 @@ class MainActivity : AppCompatActivity() {
 
         Handler().postDelayed({
 
-                              gg.notifyWithLimitItemNumb(3,60,fuck)
+                              gg.notifyWithLimitItemNumb2(3,
+                                  (fuck.layoutManager as LinearLayoutManager).getChildAt(0)!!.height,fuck)
 
 
 
