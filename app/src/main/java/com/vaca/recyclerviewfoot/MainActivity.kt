@@ -2,6 +2,7 @@ package com.vaca.recyclerviewfoot
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,15 +19,27 @@ class MainActivity : AppCompatActivity() {
         fuck.adapter=gg
         fuck.layoutManager=lm
 
-        fuck.addOnScrollListener(object: RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if(newState==RecyclerView.SCROLL_STATE_IDLE){
-                    gg.mDatas.add("asd")
-                    gg.notifyItemInserted(gg.mDatas.size-1)
-                }
-            }
+//        fuck.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                super.onScrollStateChanged(recyclerView, newState)
+//                if(newState==RecyclerView.SCROLL_STATE_IDLE){
+//                    gg.mDatas.add("asd")
+//                    gg.notifyItemInserted(gg.mDatas.size-1)
+//                }
+//            }
+//
+//        })
 
-        })
+        Handler().postDelayed({
+
+                              gg.notifyWithLimitItemNumb(3,60,fuck)
+
+
+
+        },1000)
+
+
+
+
     }
 }

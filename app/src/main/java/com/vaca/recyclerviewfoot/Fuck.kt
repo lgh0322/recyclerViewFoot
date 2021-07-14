@@ -2,11 +2,10 @@ package com.vaca.recyclerviewfoot
 
 
 import android.content.Context
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
@@ -22,14 +21,57 @@ class Fuck (var context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 init {
     mDatas.add("fuck")
+
+    mDatas.add("fuck")
+    mDatas.add("fuck")
+    mDatas.add("fuck")
+    mDatas.add("fuck")
+
 }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == TYPE_ITEM) {
-            return ItemHolder(mInflater.inflate(R.layout.item_home_member, parent, false));
-        } else {
-            return FootHolder(mInflater.inflate(R.layout.fw, parent, false));
+    object ScaleUtils {
+        //dp转px
+        fun dip2px(context: Context, dpValue: Float): Int {
+            val scale = context.resources.displayMetrics.density
+            return (dpValue * scale + 0.5f).toInt()
         }
+
+        //px转dp
+        fun px2dip(context: Context, pxValue: Int): Int {
+            return TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                pxValue.toFloat(),
+                context.resources.displayMetrics
+            )
+                .toInt()
+        }
+    }
+
+
+    fun dp2px(dp: Int): Int {
+        return ScaleUtils.dip2px(context,dp.toFloat())
+    }
+
+
+    fun notifyWithLimitItemNumb(limitNumb: Int, dpHeight: Int, rv: RecyclerView) {
+        val params = rv.layoutParams
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT
+        if (mDatas.size < limitNumb) {
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+        } else {
+            params.height =dp2px(dpHeight) * limitNumb
+        }
+        rv.layoutParams = params
+        notifyDataSetChanged()
+    }
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+//        if (viewType == TYPE_ITEM) {
+            return ItemHolder(mInflater.inflate(R.layout.item_home_member, parent, false));
+//        } else {
+//            return FootHolder(mInflater.inflate(R.layout.fw, parent, false));
+//        }
     }
 
 
@@ -52,14 +94,14 @@ init {
     }
 
     override fun getItemCount(): Int {
-        return mDatas!!.size+1
+        return mDatas!!.size
     }
 
 
     override fun getItemViewType(position: Int): Int {
-        if (position == itemCount - 1) {
-            return TYPE_FOOT;
-        }
+//        if (position == itemCount - 1) {
+//            return TYPE_FOOT;
+//        }
         return TYPE_ITEM;
     }
 
